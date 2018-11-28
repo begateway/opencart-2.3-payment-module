@@ -67,7 +67,7 @@ class ControllerExtensionPaymentBegateway extends Controller {
       'language' => $this->_language($this->session->data['language']),
       'notification_url'=> $callback_url);
 
-    $transaction_type='payment';
+    $transaction_type = $this->config->get('begateway_transaction_type');
 
     $checkout_array = array(
       'version' => self::API_VERSION,
@@ -199,7 +199,7 @@ class ControllerExtensionPaymentBegateway extends Controller {
     $lang = strtolower($lang);
     return $lang;
   }
-  
+
   protected function is_authorized() {
     $username=$this->config->get('begateway_companyid');
     $password=$this->config->get('begateway_encryptionkey');

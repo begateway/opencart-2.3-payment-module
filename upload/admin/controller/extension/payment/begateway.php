@@ -140,6 +140,12 @@ class ControllerExtensionPaymentBegateway extends Controller {
       $data['begateway_completed_status_id'] = $this->config->get('begateway_completed_status_id');
     }
 
+    if (isset($this->request->post['begateway_transaction_type'])) {
+      $data['begateway_transaction_type'] = $this->request->post['begateway_transaction_type'];
+    } else {
+      $data['begateway_transaction_type'] = $this->config->get('begateway_transaction_type');
+    }
+
     if (isset($this->request->post['begateway_test_mode'])) {
       $data['begateway_test_mode'] = $this->request->post['begateway_test_mode'];
     } else {

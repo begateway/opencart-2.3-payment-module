@@ -122,6 +122,25 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-test-mode"><?php echo $entry_transaction_type_text; ?></label>
+            <div class="col-sm-10">
+              <select name="begateway_transaction_type" id="input-transaction-type" class="form-control">
+                <?php
+                      $payment_selected = '';
+                      $authorization_selected = '';
+
+                      if ($begateway_transaction_type == 'payment') {
+                        $payment_selected = 'selected';
+                      } elseif ($begateway_transaction_type == 'authorization') {
+                        $authorization_selected = 'selected';
+                      }
+                ?>
+                <option value="payment" <?php echo $payment_selected; ?> ><?php echo $entry_transaction_type_payment; ?></option>
+                <option value="authorization" <?php echo $authorization_selected; ?> ><?php echo $entry_transaction_type_authorization; ?></option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-test-mode"><?php echo $entry_test_mode; ?></label>
             <div class="col-sm-10">
               <select name="begateway_test_mode" id="input-test-mode" class="form-control">
