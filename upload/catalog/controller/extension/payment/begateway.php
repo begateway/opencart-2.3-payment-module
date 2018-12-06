@@ -180,7 +180,11 @@ class ControllerExtensionPaymentBegateway extends Controller {
 
     $order_info = $this->model_checkout_order->getOrder($order_id);
 
-    if ($this->is_authorized() && $order_info) {
+    if (!$order_info) {
+      die('Unable to load order info');
+    }
+
+    if ($this->is_authorized()) {
       $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('config_order_status_id'));
 
       if(isset($status) && $status == 'successful'){
@@ -191,6 +195,8 @@ class ControllerExtensionPaymentBegateway extends Controller {
         $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('begateway_failed_status_id'), "UID: $transaction_id. Fail reason: $transaction_message", true);
         die('Changed to failed');
       }
+    } else {
+      die('webhook not authorized');
     }
   }
 
@@ -203,12 +209,25 @@ class ControllerExtensionPaymentBegateway extends Controller {
   protected function is_authorized() {
     $username=$this->config->get('begateway_companyid');
     $password=$this->config->get('begateway_encryptionkey');
+    $token = null;
+    $id = null;
+    $key = null;
+
     if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-      return $_SERVER['PHP_AUTH_USER'] == $username &&
-             $_SERVER['PHP_AUTH_PW'] == $password;
+      $id  = $_SERVER['PHP_AUTH_USER'];
+      $key = $_SERVER['PHP_AUTH_PW'];
+    } elseif (isset($_SERVER['HTTP_AUTHORIZATION']) && !is_null($_SERVER['HTTP_AUTHORIZATION'])) {
+        $token = $_SERVER['HTTP_AUTHORIZATION'];
+    } elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']) && !is_null($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $token = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
     }
 
-    return false;
+    if ($token != null) {
+        if (strpos(strtolower($token), 'basic') === 0) {
+            list($id, $key) = explode(':', base64_decode(substr($token, 6)));
+        }
+    }
+
+    return $id == $username && $key == $password;
   }
 }
-?>
