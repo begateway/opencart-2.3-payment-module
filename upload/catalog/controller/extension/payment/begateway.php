@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentBegateway extends Controller {
-  const API_VERSION = 2.1;
+  const API_VERSION = 2;
 
   public function index() {
     $this->language->load('extension/payment/begateway');
@@ -58,7 +58,7 @@ class ControllerExtensionPaymentBegateway extends Controller {
       'tracking_id' => $order_info['order_id']);
 
     $callback_url = $this->url->link('extension/payment/begateway/callback1', '', 'SSL');
-    $callback_url = str_replace('carts.local', 'webhook.begateway.com:8443', $callback_url);
+    $callback_url = str_replace('0.0.0.0', 'webhook.begateway.com:8443', $callback_url);
 
     $setting_array = array ( 'success_url'=>$this->url->link('extension/payment/begateway/callback', '', 'SSL'),
       'decline_url'=> $this->url->link('checkout/checkout', '', 'SSL'),
@@ -94,6 +94,7 @@ class ControllerExtensionPaymentBegateway extends Controller {
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+      'X-API-Version: ' . self::API_VERSION,
       'Content-Type: application/json',
       'Content-Length: '.strlen($post_string))) ;
     curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
@@ -157,6 +158,10 @@ class ControllerExtensionPaymentBegateway extends Controller {
     $postData =  (string)file_get_contents("php://input");
 
     $post_array = json_decode($postData, true);
+
+    if (!isset($post_array['transaction'])) {
+      return;
+    }
 
     $order_id = $post_array['transaction']['tracking_id'];
 
