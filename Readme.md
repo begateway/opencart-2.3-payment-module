@@ -10,7 +10,6 @@
 * Configure the module settings:
   * Shop Id
   * Shop secret key
-  * Payment gateway domain
   * Payment page domain
   * Order statuses for successfuly processed payment and for failed one
   * Enable the module
@@ -35,7 +34,6 @@ You can use the following information to adjust the payment method in test mode:
 
   * __Shop ID:__ 361
   * __Shop Key:__ b8647b68898b084b836474ed8d61ffe117c9a01168d867f24953b776ddcb134d
-  * __Payment gateway domain:__ demo-gateway.begateway.com
   * __Payment page domain:__ checkout.begateway.com
 
 Use the following test card to make successful test payment:
@@ -68,7 +66,6 @@ Issue pull requests or send feature requests or open [a new issue]( https://gith
 * Задайте в настройках модуля beGateway:
   * Id магазина
   * Ключ магазина
-  * Домен платежного шлюза
   * Домен страницы оплаты
   * Статусы заказа в случае успешной и не успешной оплаты
   * Включите модуль
@@ -94,7 +91,6 @@ Issue pull requests or send feature requests or open [a new issue]( https://gith
 
   * __Идентификационный номер магазина:__ 361
   * __Секретный ключ магазина:__ b8647b68898b084b836474ed8d61ffe117c9a01168d867f24953b776ddcb134d
-  * __Домен платежного шлюза:__ demo-gateway.begateway.com
   * __Домен платежной страницы:__ checkout.begateway.com
   * __Режим работы:__ Тестовый
 
