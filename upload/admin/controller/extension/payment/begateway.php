@@ -41,8 +41,6 @@ class ControllerExtensionPaymentBegateway extends Controller {
     $data['entry_companyid_help'] = $this->language->get('entry_companyid_help');
     $data['entry_encyptionkey'] = $this->language->get('entry_encyptionkey');
     $data['entry_encyptionkey_help'] = $this->language->get('entry_encyptionkey_help');
-    $data['entry_domain_payment_gateway'] = $this->language->get('entry_domain_payment_gateway');
-    $data['entry_domain_payment_gateway_help'] = $this->language->get('entry_domain_payment_gateway_help');
     $data['entry_domain_payment_page'] = $this->language->get('entry_domain_payment_page');
     $data['entry_domain_payment_page_help'] = $this->language->get('entry_domain_payment_page_help');
     $data['entry_transaction_type_text'] = $this->language->get('entry_transaction_type_text');
@@ -72,12 +70,6 @@ class ControllerExtensionPaymentBegateway extends Controller {
       $data['error_encyptionkey'] = $this->error['encyptionkey'];
     } else {
       $data['error_encyptionkey'] = '';
-    }
-
-    if (isset($this->error['domain_payment_gateway'])) {
-      $data['error_domain_payment_gateway'] = $this->error['domain_payment_gateway'];
-    } else {
-      $data['error_domain_payment_gateway'] = '';
     }
 
     if (isset($this->error['domain_payment_page'])) {
@@ -206,9 +198,6 @@ class ControllerExtensionPaymentBegateway extends Controller {
       $this->error['encyptionkey'] = $this->language->get('error_encyptionkey');
     }
 
-    if (!$this->request->post['begateway_domain_payment_gateway']) {
-        $this->error['domain_payment_gateway'] = $this->language->get('error_domain_payment_gateway');
-    }
     if (!$this->request->post['begateway_domain_payment_page']) {
       $this->error['domain_payment_page'] = $this->language->get('error_domain_payment_page');
     }

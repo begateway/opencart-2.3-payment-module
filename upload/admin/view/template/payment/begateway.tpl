@@ -44,15 +44,6 @@
             </div>
           </div>
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-key"><span data-toggle="tooltip" title="<?php echo $entry_domain_payment_gateway_help; ?>"><?php echo $entry_domain_payment_gateway; ?></span></label>
-            <div class="col-sm-10">
-              <input type="text" name="begateway_domain_payment_gateway" value="<?php echo $begateway_domain_payment_gateway; ?>" placeholder="<?php echo $entry_domain_payment_gateway; ?>" id="input-key" class="form-control" />
-              <?php if ($error_domain_payment_gateway) { ?>
-              <div class="text-danger"><?php echo $error_domain_payment_gateway; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-key"><span data-toggle="tooltip" title="<?php echo $entry_domain_payment_page_help; ?>"><?php echo $entry_domain_payment_page; ?></span></label>
             <div class="col-sm-10">
               <input type="text" name="begateway_domain_payment_page" value="<?php echo $begateway_domain_payment_page; ?>" placeholder="<?php echo $entry_domain_payment_page; ?>" id="input-key" class="form-control" />
